@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.ambrella.mvpexample2.R
 import com.ambrella.mvpexample2.base.BaseFragment
+import com.ambrella.mvpexample2.data.model.Member
 import com.ambrella.mvpexample2.databinding.FragmentLoginBinding
 
 
@@ -17,9 +18,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(),LoginContract.View {
 
 lateinit var presentr : LoginContract.Presenter
 lateinit var loginPresenter: LoginPresenter
-
-
-
+lateinit var members: MutableList<Member>
+    override fun onStart() {
+        super.onStart()
+        presentr=LoginPresenter()
+        members=presentr.exportlist(requireContext())
+       // requireContext()
+    }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentLoginBinding {
        return FragmentLoginBinding.inflate(inflater,container,false)
@@ -27,14 +32,14 @@ lateinit var loginPresenter: LoginPresenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presentr=LoginPresenter()
+
 
         binding.button2.setOnClickListener {
             Log.i("tag111","okrrrr")
-            if (presentr.validateLoginFields(requireContext(),binding.editTextTextPersonName.text.toString())){
+            if (presentr.validateLoginFields(members,binding.editTextTextPersonName.text.toString())){
                 Log.i("tag111","okrrrr")
                 showSuccessfulMessage("LOGIN")
-                navigateTo("test",R.id.action_loginFragment_to_memberFragment)
+                navigateTo(binding.editTextTextPersonName.text.toString(),R.id.action_loginFragment_to_memberFragment)
             }else
             {
                 showSuccessfulMessage("ERROR")
@@ -52,7 +57,7 @@ lateinit var loginPresenter: LoginPresenter
     override fun navigateTo(mail: String, marshrit: Int) {
         val bundle = Bundle()
         bundle.putString("title1", mail)
-        //findNavController().navigate(R.id.action_loginFragment_to_memberFragment)
+
         findNavController().navigate(marshrit,bundle)
     }
 }

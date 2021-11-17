@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.count
 import kotlin.properties.Delegates
 
 class LoginPresenter():LoginContract.Presenter {
-     var result:Boolean=false
-    override fun validateLoginFields(context: Context,email:String): Boolean {
+
+  /*  override fun validateLoginFields(context: Context,email:String): Boolean {
 
         val repositoryMember:RepositoryMember=RepositoryMemberImpl(context, Dispatchers.IO)
         val memberList: LiveData<List<Member>> = repositoryMember.getAllCity().asLiveData()
@@ -28,5 +28,31 @@ class LoginPresenter():LoginContract.Presenter {
         }
 
         return result
+    }
+
+   */
+
+    override fun validateLoginFields(members: MutableList<Member>, email: String): Boolean {
+        var result:Boolean=false
+        for (i in members)
+        {
+            result  = if(email.equals(i.fname))  true else false
+        }
+        return result
+    }
+
+    override fun exportlist(context: Context): MutableList<Member> {
+
+        val repositoryMember:RepositoryMember=RepositoryMemberImpl(context, Dispatchers.IO)
+        val memberList: LiveData<List<Member>> = repositoryMember.getAllCity().asLiveData()
+        val res:MutableList<Member> = mutableListOf()
+        memberList.observeForever { it ->
+            it.forEach {
+
+                res.add(it)
+            }
+        }
+
+        return res
     }
 }

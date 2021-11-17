@@ -18,5 +18,12 @@ interface DAOmember {
     suspend fun deleteAll()
 
     @Delete
-    suspend fun delete(member: Member): Int
+    suspend fun delete(member: Member)
+
+    @Update
+    suspend fun update(member: Member)
+
+    @Query("SELECT * FROM table_member WHERE fname LIKE :search")
+    fun getByMember(search: String):Flow<List<Member>>
+
 }

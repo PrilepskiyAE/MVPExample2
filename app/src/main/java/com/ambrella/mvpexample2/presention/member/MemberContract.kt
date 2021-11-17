@@ -1,19 +1,19 @@
 package com.ambrella.mvpexample2.presention.member
 
+import android.content.Context
+import com.ambrella.mvpexample2.data.model.Member
+
 interface MemberContract {
     interface View{
-        fun loadUserDetail(message:String)
-        fun showSuccess(message:String)
-        fun navigateToNextPage()
-        fun refreshPage(message:String)
-        fun logOut()
+
+        fun updateClick()
+        fun logOutClick()
     }
     interface Presenter{
-        fun getUserEmail(message:String)
-        fun logOut(message:String)
-        fun getUserDetail(message:String)
-        fun deleteAccount(message:String)
-        fun validateUpdateFields(message:String):Boolean
+        fun searchAccount(member: String, context: Context):String
+        fun deleteAccount(member: Member, context: Context)
+        fun updateAccount(member: Member, context: Context)
+        fun exportlist(context: Context,string: String):MutableList<Member>
     }
 
 }

@@ -41,4 +41,14 @@ class RepositoryMemberImpl(context: Context, private val backgroundDispatcher: C
             memberDao.delete(member)
         }
     }
+
+    override suspend fun update(member: Member) {
+        withContext(backgroundDispatcher){
+            memberDao.update(member)
+        }
+    }
+
+    override  fun getByMember(search: String): Flow<List<Member>> {
+        return memberDao.getByMember(search)
+    }
 }

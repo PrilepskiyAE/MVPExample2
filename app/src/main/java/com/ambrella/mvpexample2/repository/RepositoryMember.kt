@@ -8,4 +8,6 @@ interface RepositoryMember {
     suspend fun insert(member: Member)
     suspend fun deleteAll()
     suspend fun delete(member: Member)
+    suspend fun update(member: Member)
+    fun getByMember(search: String): Flow<List<Member>>
 }
