@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/drawable/outline_search_white_18dp.xml" value="0.1" />
         <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/layout/activity_main.xml" value="0.35989583333333336" />
         <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/layout/dialog.xml" value="0.20104166666666667" />
         <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/layout/fragment_login.xml" value="0.35989583333333336" />
         <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/layout/fragment_member.xml" value="0.2" />
         <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="..\:/Project/Android/MVPExample2/app/src/main/res/layout/fragment_update.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

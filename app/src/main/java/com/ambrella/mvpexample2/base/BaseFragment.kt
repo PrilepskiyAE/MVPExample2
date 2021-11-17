@@ -24,4 +24,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     }
 
     abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): T
+
+
 }
