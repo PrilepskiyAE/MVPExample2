@@ -6,6 +6,7 @@ import com.ambrella.mvpexample2.data.db.RoomDatabaseMember
 import com.ambrella.mvpexample2.data.model.Member
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.withContext
 
 class RepositoryMemberImpl(context: Context, private val backgroundDispatcher: CoroutineDispatcher):RepositoryMember {
@@ -48,7 +49,9 @@ class RepositoryMemberImpl(context: Context, private val backgroundDispatcher: C
         }
     }
 
-    override  fun getByMember(search: String): Flow<List<Member>> {
+    override  fun getByMember(search: String):List<Member> {
         return memberDao.getByMember(search)
     }
+
+
 }

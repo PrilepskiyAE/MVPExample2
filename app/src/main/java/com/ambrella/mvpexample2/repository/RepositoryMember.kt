@@ -9,5 +9,5 @@ interface RepositoryMember {
     suspend fun deleteAll()
     suspend fun delete(member: Member)
     suspend fun update(member: Member)
-    fun getByMember(search: String): Flow<List<Member>>
+    fun getByMember(search: String):List<Member>
 }

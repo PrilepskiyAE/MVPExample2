@@ -12,6 +12,7 @@ import com.ambrella.mvpexample2.R
 import com.ambrella.mvpexample2.base.BaseFragment
 import com.ambrella.mvpexample2.data.model.Member
 import com.ambrella.mvpexample2.databinding.FragmentLoginBinding
+import kotlinx.coroutines.delay
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(),LoginContract.View {
@@ -36,7 +37,7 @@ lateinit var members: MutableList<Member>
 
         binding.button2.setOnClickListener {
             Log.i("tag111","okrrrr")
-            if (presentr.validateLoginFields(members,binding.editTextTextPersonName.text.toString())){
+            if (presentr.validateLoginFields(members,binding.editTextTextPersonName.text.toString(),binding.editTextTextPassword.text.toString())){
                 Log.i("tag111","okrrrr")
                 showSuccessfulMessage("LOGIN")
                 navigateTo(binding.editTextTextPersonName.text.toString(),R.id.action_loginFragment_to_memberFragment)

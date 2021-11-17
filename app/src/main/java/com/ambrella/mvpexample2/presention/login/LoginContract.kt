@@ -9,7 +9,7 @@ interface LoginContract {
         fun navigateTo(mail:String,marshrit:Int)
     }
     interface Presenter{
-        fun validateLoginFields(members:MutableList<Member>,email:String):Boolean
+        fun validateLoginFields(members:MutableList<Member>,name:String, pass:String):Boolean
         fun exportlist(context: Context):MutableList<Member>
     }
 }

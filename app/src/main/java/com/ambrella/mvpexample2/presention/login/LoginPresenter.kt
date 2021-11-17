@@ -16,27 +16,13 @@ import kotlin.properties.Delegates
 
 class LoginPresenter():LoginContract.Presenter {
 
-  /*  override fun validateLoginFields(context: Context,email:String): Boolean {
 
-        val repositoryMember:RepositoryMember=RepositoryMemberImpl(context, Dispatchers.IO)
-        val memberList: LiveData<List<Member>> = repositoryMember.getAllCity().asLiveData()
-        memberList.observeForever { it ->
-            it.forEach {
-                result  = if(email.equals(it.fname)) true else false
-                //result  = if(email.equals("test")) true else false
-            }
-        }
 
-        return result
-    }
-
-   */
-
-    override fun validateLoginFields(members: MutableList<Member>, email: String): Boolean {
+    override fun validateLoginFields(members: MutableList<Member>, name: String,pass:String): Boolean {
         var result:Boolean=false
         for (i in members)
         {
-            result  = if(email.equals(i.fname))  true else false
+            result  = if(name.equals(i.fname)&&pass.equals(i.pass))  true else false
         }
         return result
     }

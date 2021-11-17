@@ -6,8 +6,9 @@ import com.ambrella.mvpexample2.data.model.Member
 interface MemberContract {
     interface View{
 
-        fun updateClick()
+        fun updateClick(member: Member)
         fun logOutClick()
+        fun deleteOnClick(member: Member)
     }
     interface Presenter{
         fun searchAccount(member: String, context: Context):String

@@ -10,6 +10,8 @@ import com.ambrella.mvpexample2.repository.RepositoryMemberImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.concurrent.Callable
+import java.util.concurrent.Executors
 
 class MemberPresenter:MemberContract.Presenter {
     override fun searchAccount(memb: String, context: Context):String {
@@ -30,15 +32,12 @@ class MemberPresenter:MemberContract.Presenter {
 
     override fun exportlist(context: Context,string: String): MutableList<Member> {
         val repositoryMember:RepositoryMember=RepositoryMemberImpl(context, Dispatchers.Default)
-        val memberList: LiveData<List<Member>> = repositoryMember.getAllCity().asLiveData()
-        val res:MutableList<Member> = mutableListOf()
-        memberList.observeForever { it ->
-            it.forEach {
-
-                res.add(it)
-            }
-        }
-
+        val callable = Callable {repositoryMember.getByMember(string)}
+       // val memberList: List<Member> = repositoryMember.getByMember(string)
+        var res:MutableList<Member> = mutableListOf()
+        val future = Executors.newSingleThreadExecutor().submit(callable)
+        res=future.get().toMutableList()
+Log.d("test234",res.toString())
         return res
     }
 }

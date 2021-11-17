@@ -24,6 +24,6 @@ interface DAOmember {
     suspend fun update(member: Member)
 
     @Query("SELECT * FROM table_member WHERE fname LIKE :search")
-    fun getByMember(search: String):Flow<List<Member>>
+    fun getByMember(search: String):List<Member>
 
 }
