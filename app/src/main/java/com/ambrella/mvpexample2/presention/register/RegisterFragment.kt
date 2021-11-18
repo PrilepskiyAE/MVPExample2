@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.ambrella.mvpexample2.R
@@ -33,11 +34,22 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(),RegisterContrac
         binding.btClose.setOnClickListener { navigateTo("test",R.id.action_registerFragment_to_loginFragment) }
         binding.btRegin.setOnClickListener {
 
+            val fname:String = binding.etFname.text.toString()
+            val lname:String = binding.etlname.text.toString()
+            val email:String = binding.etEmailAddress.text.toString()
+            val pass:String = binding.etPassword.text.toString()
+            val phone:String = binding.etPhone.text.toString()
+            if(!fname.equals("") && !lname.equals("") && !email.equals("") && !pass.equals("") && !phone.equals("")){
             presentr.validateRegisterFields(
-                member = Member(fname = binding.etFname.text.toString(),lname = binding.etlname.text.toString(),phone = binding.etPhone.text.toString(),email = binding.etEmailAddress.text.toString(),pass = binding.etPassword.text.toString()),
+                member = Member(fname = fname,lname = lname,email = email,pass = pass,phone = phone),
                 context = requireContext()
             )
-            navigateTo("test",R.id.action_registerFragment_to_loginFragment)
+                Toast.makeText(activity, "регистрация успешно выполнена", Toast.LENGTH_SHORT).show();
+            navigateTo("test",R.id.action_registerFragment_to_loginFragment)}
+            else
+            {
+                Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

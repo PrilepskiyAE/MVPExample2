@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.ambrella.mvpexample2.R
 import com.ambrella.mvpexample2.base.BaseFragment
@@ -37,7 +38,8 @@ var presentr:MemberContract.Presenter=MemberPresenter()
        val member= presentr.exportlist(requireContext(), requireArguments().getString("title1")!!
         )
         Log.d("test22",member.toString())
-        binding.textView2.text="Здравствуйте Уважаемый ${member.last().lname} \n ${member.last().fname} \n ${member.last().email}  "
+        binding.textView2.text=
+            "Здравствуйте Уважаемый ${member.last().lname} \n ${member.last().fname} \n ${member.last().email}  "
         binding.btDelete.setOnClickListener { deleteOnClick(member.last()) }
         binding.btExit.setOnClickListener { logOutClick() }
         binding.btUpdate.setOnClickListener {
@@ -55,6 +57,8 @@ var presentr:MemberContract.Presenter=MemberPresenter()
             val email:String=dialog.findViewById<EditText>(R.id.et_EmailAddress1).text.toString()
             val pass:String=dialog.findViewById<EditText>(R.id.et_password1).text.toString()
             val phone:String=dialog.findViewById<EditText>(R.id.et_Phone1).text.toString()
+            if(!fname.equals("") && !lname.equals("") && !email.equals("") && !pass.equals("") && !phone.equals("")){
+
             presentr.updateAccount(Member(
                 member.id,
                 fname = fname,
@@ -63,8 +67,11 @@ var presentr:MemberContract.Presenter=MemberPresenter()
                 pass = pass,
                 phone = phone),
                 requireContext())
-            findNavController().navigate(R.id.action_memberFragment_to_loginFragment)
-            dialog.cancel()
+                Toast.makeText(activity, "Пользовательские данные успешно изменены", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_memberFragment_to_loginFragment)
+                dialog.cancel()
+            }
+           else  Toast.makeText(activity, "Заполните все поля", Toast.LENGTH_SHORT).show();
         }
 
 
